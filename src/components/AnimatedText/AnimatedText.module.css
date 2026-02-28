@@ -1,0 +1,39 @@
+.wrapper {
+  display: inline;
+}
+
+.wordOuter {
+  display: inline-block;
+  /* Clip overflow so hidden words don't cause layout jank */
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+/* Static state (already played) or final resting state */
+.visible {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Running animation state */
+.animate {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: wordReveal 420ms cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes wordReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

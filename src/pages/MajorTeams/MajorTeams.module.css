@@ -1,0 +1,228 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - var(--topbar-height));
+}
+
+/* ─── Header ───────────────────────────────────────────────────────── */
+.header {
+  padding: 72px 24px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.04) 0%,
+    transparent 100%
+  );
+}
+
+.headerInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+.headerRule {
+  height: 1px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    var(--accent),
+    var(--divider) 60%,
+    transparent
+  );
+}
+
+/* ─── Content ──────────────────────────────────────────────────────── */
+.content {
+  padding: 60px 24px;
+}
+
+.contentInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ─── Team List ────────────────────────────────────────────────────── */
+.teamList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ─── Team Card ────────────────────────────────────────────────────── */
+.teamCard {
+  display: grid;
+  /* Square banner column: 400px × 400px, info fills the rest */
+  grid-template-columns: 400px 1fr;
+  background-color: var(--bg-elevated);
+  transition: background-color var(--transition-normal);
+  border-bottom: 1px solid var(--divider-strong);
+}
+
+.teamCard:last-child {
+  border-bottom: none;
+}
+
+.teamCard:hover {
+  background-color: var(--bg-surface);
+}
+
+/* ─── Banner ───────────────────────────────────────────────────────── */
+.teamBanner {
+  /* Force a 1:1 square */
+  aspect-ratio: 1 / 1;
+  width: 400px;
+  align-self: start;
+  position: relative;
+  overflow: hidden;
+  /* Dark fill behind contained image so letterbox areas match the card */
+  background-color: var(--bg-primary);
+}
+
+.bannerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bannerPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0f1a 0%, #130d1f 50%, #0b0b0b 100%);
+}
+
+.bannerLabel {
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--divider-strong);
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+/* ─── Team Info ────────────────────────────────────────────────────── */
+.teamInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px 36px;
+  border-left: 1px solid var(--divider);
+  overflow: hidden;
+}
+
+.teamName {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.5vw, 2.6rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.teamDesc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  white-space: pre-line;
+  /* Gracefully truncate if text would overflow the fixed card height */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Coming Soon ──────────────────────────────────────────────────── */
+.comingSoon {
+  margin: auto 0 0;
+  padding: 40px 24px 60px;
+  text-align: center;
+}
+
+.comingSoonText {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .header {
+    padding-top: 48px;
+  }
+
+  .teamCard {
+    grid-template-columns: 1fr;
+  }
+
+  .teamBanner {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* No right-fade on mobile — fade bottom instead */
+  .teamBanner::after {
+    background: linear-gradient(
+      to bottom,
+      transparent 55%,
+      var(--bg-elevated) 100%
+    );
+  }
+
+  .teamCard:hover .teamBanner::after {
+    background: linear-gradient(
+      to bottom,
+      transparent 55%,
+      var(--bg-surface) 100%
+    );
+  }
+
+  .teamInfo {
+    border-left: none;
+    border-top: 1px solid var(--divider);
+    padding: 24px 20px;
+  }
+
+  .teamDesc {
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+  }
+}

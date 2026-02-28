@@ -1,0 +1,223 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--topbar-height);
+  background-color: rgba(11, 11, 11, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--divider);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Brand ─────────────────────────────────────────────────────────── */
+.brand {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: opacity var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.brand:hover {
+  opacity: 0.85;
+}
+
+.brandAccent {
+  color: var(--accent);
+}
+
+/* ─── Desktop Nav ────────────────────────────────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navLink {
+  display: inline-block;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-radius: var(--radius);
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  right: 14px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.navLink.active {
+  color: var(--text-primary);
+}
+
+.navLink.active::after {
+  transform: scaleX(1);
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+
+/* ─── Hamburger ──────────────────────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border-radius: var(--radius);
+  transition: background-color var(--transition-fast);
+}
+
+.hamburger:hover {
+  background-color: var(--accent-subtle);
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 1px;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+  transform-origin: center;
+}
+
+/* Animate bars into X when open */
+.hamburgerOpen .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburgerOpen .bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburgerOpen .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ─── Mobile Menu ────────────────────────────────────────────────────── */
+.mobileMenu {
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  right: 0;
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--divider-strong);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--transition-normal), opacity var(--transition-normal);
+  opacity: 0;
+  z-index: 99;
+}
+
+.mobileMenuOpen {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.mobileList {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+}
+
+.mobileLink {
+  display: block;
+  padding: 14px 24px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-left: 2px solid transparent;
+  transition: color var(--transition-fast), border-color var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+.mobileLink:hover {
+  color: var(--text-primary);
+  background-color: var(--accent-subtle);
+}
+
+.mobileLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.mobileLink.active {
+  color: var(--text-primary);
+  border-left-color: var(--accent);
+  background-color: var(--accent-subtle);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  top: var(--topbar-height);
+  z-index: 98;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}

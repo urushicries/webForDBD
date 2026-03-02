@@ -2,38 +2,20 @@
   display: inline;
 }
 
-.wordOuter {
+/* Blinking text cursor */
+.cursor {
   display: inline-block;
-  /* Clip overflow so hidden words don't cause layout jank */
-  overflow: hidden;
-  vertical-align: bottom;
+  width: 2px;
+  height: 0.9em;
+  background: currentColor;
+  margin-left: 5px;
+  margin-bottom: 0.17em;
+  vertical-align: text-bottom;
+  border-radius: 1px;
+  animation: cursorBlink 1s step-end infinite;
 }
 
-/* Static state (already played) or final resting state */
-.visible {
-  display: inline-block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Running animation state */
-.animate {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(18px);
-  animation: wordReveal 420ms cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
-}
-
-@keyframes wordReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }

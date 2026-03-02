@@ -58,12 +58,10 @@ export default function MainPage() {
           <p className={styles.eyebrow}>Dead by Daylight · Competitive Hub</p>
 
           <h1 id="hero-heading" className={styles.heroHeading}>
-            <AnimatedText text="Comp DBD all in one place" />
+            <AnimatedText text="COMP DBD PLACE"/>
           </h1>
-
-          <p className={styles.heroSub}>
-            Tournaments. Scrims. Builds. Rankings.&nbsp;
-            Everything the comp scene needs, unified.
+            <p className={styles.heroSub}>
+            Everything you need to know to start your way in competitive Dead by Daylight.
           </p>
 
           <div className={styles.heroCta}>
@@ -118,6 +116,7 @@ export default function MainPage() {
                 </div>
               </li>
             ))}
+
           </ul>
 
           <p className={styles.moreSoon}>more coming soon, maybe</p>

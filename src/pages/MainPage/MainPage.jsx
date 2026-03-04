@@ -68,9 +68,6 @@ export default function MainPage() {
             <Link to="/big-leagues" className={styles.ctaPrimary}>
               View Tournaments
             </Link>
-            <Link to="/dbd-scrims" className={styles.ctaSecondary}>
-              Find Scrims
-            </Link>
           </div>
         </div>
       </section>

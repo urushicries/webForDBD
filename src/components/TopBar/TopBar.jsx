@@ -11,6 +11,8 @@ const NAV_LINKS = [
   { label: '1v1 Ladder',       path: '/1v1-ladder' },
   { label: 'Major Teams',      path: '/major-teams' },
   { label: 'Tutorials',        path: '/tutorials' },
+  { label: 'Tournaments',      path: '/tournaments' },
+  { label: 'Moderation',       path: '/moderation' },
 ];
 
 export default function TopBar() {

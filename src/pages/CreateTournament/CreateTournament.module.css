@@ -1,0 +1,320 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - var(--topbar-height));
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.header {
+  padding: 72px 24px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.04) 0%,
+    transparent 100%
+  );
+}
+
+.headerInner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.headerRule {
+  height: 1px;
+  max-width: 720px;
+  margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    var(--accent),
+    var(--divider) 60%,
+    transparent
+  );
+}
+
+/* ── Form Section ────────────────────────────────────────────────────── */
+.formSection {
+  padding: 56px 24px 80px;
+}
+
+.formInner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ── Field ───────────────────────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.required {
+  color: var(--accent);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: -4px;
+}
+
+/* ── Input & Textarea ────────────────────────────────────────────────── */
+.input,
+.textarea {
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider-strong);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  outline: none;
+  resize: vertical;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  width: 100%;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.inputError {
+  border-color: #ef4444;
+}
+
+.inputError:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* ── Field footer (error + char count) ───────────────────────────────── */
+.fieldFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 18px;
+}
+
+.error {
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+.charCount {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* ── Image Upload ────────────────────────────────────────────────────── */
+.hiddenInput {
+  display: none;
+}
+
+.uploadBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--divider-strong);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+  width: fit-content;
+}
+
+.uploadBtn:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.uploadIcon {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.previewWrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--divider-strong);
+  background: var(--bg-primary);
+}
+
+.previewImg {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.removeImgBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition-fast);
+}
+
+.removeImgBtn:hover {
+  background: rgba(239, 68, 68, 0.85);
+}
+
+/* ── Actions ─────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 4px;
+}
+
+.btnPrimary {
+  display: inline-block;
+  padding: 11px 26px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.btnPrimary:hover {
+  opacity: 0.87;
+}
+
+.btnGhost {
+  display: inline-block;
+  padding: 11px 22px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  border: 1px solid var(--divider-strong);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btnGhost:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* ── Success Screen ──────────────────────────────────────────────────── */
+.successWrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+.successCard {
+  max-width: 440px;
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider-strong);
+  border-radius: var(--radius);
+  padding: 52px 40px;
+  text-align: center;
+}
+
+.successIcon {
+  font-size: 2.4rem;
+  color: #22c55e;
+  margin-bottom: 18px;
+}
+
+.successHeading {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.successSub {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

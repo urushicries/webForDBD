@@ -1,0 +1,373 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - var(--topbar-height));
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.header {
+  padding: 72px 24px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.04) 0%,
+    transparent 100%
+  );
+}
+
+.headerInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.headerRule {
+  height: 1px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    var(--accent),
+    var(--divider) 60%,
+    transparent
+  );
+}
+
+/* ── Content ─────────────────────────────────────────────────────────── */
+.content {
+  padding: 48px 24px 80px;
+}
+
+.contentInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Stats / Filter bar ──────────────────────────────────────────────── */
+.statsBar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider-strong);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.filterBtn:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.filterBtnActive {
+  border-color: var(--accent);
+  color: var(--text-primary);
+  background: var(--accent-subtle);
+}
+
+.filterLabel {
+  /* no extra style needed */
+}
+
+.filterBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+.badge_pending  { background: rgba(234,179,8,0.15); color: #eab308; }
+.badge_approved { background: rgba(34,197,94,0.12); color: #22c55e; }
+.badge_denied   { background: rgba(239,68,68,0.12); color: #ef4444; }
+
+/* ── Empty ───────────────────────────────────────────────────────────── */
+.empty {
+  padding: 60px 24px;
+  text-align: center;
+  border: 1px dashed var(--divider-strong);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ── Post List ───────────────────────────────────────────────────────── */
+.postList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ── Post Card ───────────────────────────────────────────────────────── */
+.postCard {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  gap: 0;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--divider-strong);
+  transition: background var(--transition-normal);
+}
+
+.postCard:last-child { border-bottom: none; }
+.postCard:hover      { background: var(--bg-surface); }
+
+/* ── Thumbnail ───────────────────────────────────────────────────────── */
+.thumb {
+  width: 160px;
+  aspect-ratio: 16 / 9;
+  align-self: stretch;
+  overflow: hidden;
+  background: var(--bg-primary);
+  flex-shrink: 0;
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #111 100%);
+}
+
+/* ── Meta ────────────────────────────────────────────────────────────── */
+.meta {
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.metaTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.postTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.statusBadge {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.status_pending  { background: rgba(234,179,8,0.15);  color: #eab308; }
+.status_approved { background: rgba(34,197,94,0.12);  color: #22c55e; }
+.status_denied   { background: rgba(239,68,68,0.12);  color: #ef4444; }
+
+.postDesc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-line;
+  /* Clamp to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.postDate {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Action Buttons Column ───────────────────────────────────────────── */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  padding: 20px 24px;
+  border-left: 1px solid var(--divider);
+  min-width: 130px;
+}
+
+.btnApprove,
+.btnDeny,
+.btnDelete,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: opacity var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btnApprove {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.btnApprove:hover { background: rgba(34, 197, 94, 0.25); }
+
+.btnDeny {
+  background: rgba(234, 179, 8, 0.12);
+  color: #eab308;
+  border: 1px solid rgba(234, 179, 8, 0.25);
+}
+.btnDeny:hover { background: rgba(234, 179, 8, 0.22); }
+
+.btnDelete {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+.btnDelete:hover { background: rgba(239, 68, 68, 0.2); }
+
+.btnGhost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--divider-strong);
+}
+.btnGhost:hover { border-color: var(--accent); color: var(--text-primary); }
+
+/* ── Confirm Overlay ─────────────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+}
+
+.dialog {
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider-strong);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dialogTitle {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+}
+
+.dialogBody {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.dialogActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .postCard {
+    grid-template-columns: 1fr;
+  }
+
+  .thumb {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+  }
+
+  .actions {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border-left: none;
+    border-top: 1px solid var(--divider);
+    padding: 16px 20px;
+  }
+}

@@ -1,0 +1,227 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - var(--topbar-height));
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.header {
+  padding: 72px 24px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.04) 0%,
+    transparent 100%
+  );
+}
+
+.headerInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.postBtn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: opacity var(--transition-fast);
+}
+
+.postBtn:hover {
+  opacity: 0.85;
+}
+
+.headerRule {
+  height: 1px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    var(--accent),
+    var(--divider) 60%,
+    transparent
+  );
+}
+
+/* ── Feed ────────────────────────────────────────────────────────────── */
+.feed {
+  padding: 60px 24px;
+}
+
+.feedInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────── */
+.empty {
+  text-align: center;
+  padding: 80px 24px;
+  border: 1px dashed var(--divider-strong);
+  border-radius: var(--radius);
+}
+
+.emptyHeading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.emptySub {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.emptyLink {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Post List ───────────────────────────────────────────────────────── */
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ── Post Card ───────────────────────────────────────────────────────── */
+.postCard {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--divider-strong);
+  transition: background-color var(--transition-normal);
+}
+
+.postCard:last-child {
+  border-bottom: none;
+}
+
+.postCard:hover {
+  background-color: var(--bg-surface);
+}
+
+/* ── Banner ──────────────────────────────────────────────────────────── */
+.bannerWrap {
+  aspect-ratio: 16 / 9;
+  width: 320px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.bannerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bannerPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #111 100%);
+}
+
+.placeholderText {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Card Info ───────────────────────────────────────────────────────── */
+.cardInfo {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.cardDate {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .postCard {
+    grid-template-columns: 1fr;
+  }
+
+  .bannerWrap {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+  }
+
+  .cardInfo {
+    padding: 20px;
+  }
+}

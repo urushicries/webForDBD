@@ -7,6 +7,9 @@ import DBDRanked from './pages/DBDRanked/DBDRanked';
 import Tutorials from './pages/Tutorials/Tutorials';
 import DBD1v1Ladder from './pages/DBD1v1Ladder/DBD1v1Ladder';
 import MajorTeams from './pages/MajorTeams/MajorTeams';
+import Tournaments from './pages/Tournaments/Tournaments';
+import CreateTournament from './pages/CreateTournament/CreateTournament';
+import Moderation from './pages/Moderation/Moderation';
 
 export default function App() {
   return (
@@ -19,7 +22,10 @@ export default function App() {
           <Route path="/dbd-ranked"    element={<DBDRanked />} />
           <Route path="/tutorials"     element={<Tutorials />} />
           <Route path="/1v1-ladder"    element={<DBD1v1Ladder />} />
-          <Route path="/major-teams"   element={<MajorTeams />} />
+          <Route path="/major-teams"       element={<MajorTeams />} />
+          <Route path="/tournaments"         element={<Tournaments />} />
+          <Route path="/create-tournament"   element={<CreateTournament />} />
+          <Route path="/moderation"          element={<Moderation />} />
         </Routes>
       </Layout>
     </BrowserRouter>

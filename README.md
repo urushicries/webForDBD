@@ -1,16 +1,73 @@
-# React + Vite
+# Comp DBD Place
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A competitive Dead by Daylight hub — your one-stop resource for leagues, tournaments, ranked ladders, team profiles, and community events.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Section            | Description                                                                                                           |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **Big Leagues**    | Directory of major comp DBD leagues and tournament series (DBDLeague, Hens333, Altruism League, COTF, Rasza Official) |
+| **Ranked**         | Track MMR, match history, and climb the solo/team queue ladder                                                        |
+| **1v1 Ladder**     | One killer, one survivor — the purest comp DBD format                                                                 |
+| **Scrims**         | Organise practice sessions against other competitive teams                                                            |
+| **Major Teams**    | Rosters and profiles for top-tier organisations                                                                       |
+| **Tournaments**    | Community-posted tournament announcements with a moderated approval feed                                              |
+| **Moderation**     | Admin panel to approve, deny, or delete tournament submissions                                                        |
+| **Build Crafting** | Links out to [balancedbydaylight.com](https://balancedbydaylight.com) for killer/survivor build crafting              |
 
-## React Compiler
+**Coming soon:** Team Finder · Stats Central
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- [React 19](https://react.dev/) + [React Router v7](https://reactrouter.com/)
+- [Vite 7](https://vitejs.dev/) — dev server and build tool
+- CSS Modules — scoped component styles
+- ESLint — linting
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+**Prerequisites:** Node.js ≥ 18
+
+```bash
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+## Scripts
+
+| Command           | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the Vite development server    |
+| `npm run build`   | Production build (output: `dist/`)   |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Run ESLint                           |
+
+## Project Structure
+
+```
+src/
+├── App.jsx                  # Root router
+├── components/
+│   ├── AnimatedText/        # Animated heading component
+│   ├── Layout/              # Shared page shell (TopBar + outlet)
+│   └── TopBar/              # Navigation bar
+├── pages/
+│   ├── MainPage/            # Landing / hero page
+│   ├── BigLeagues/          # League directory
+│   ├── DBDRanked/           # Ranked ladder info
+│   ├── DBD1v1Ladder/        # 1v1 ladder info
+│   ├── DBDScrims/           # Scrims info
+│   ├── MajorTeams/          # Team profiles
+│   ├── Tournaments/         # Community tournament feed
+│   ├── CreateTournament/    # Submit a tournament
+│   ├── Moderation/          # Moderation admin panel
+│   ├── Tutorials/           # Competitive guides
+│   └── SectionPage/         # Reusable section layout
+└── utils/
+    └── tournamentStore.js   # LocalStorage-backed tournament post store
+```

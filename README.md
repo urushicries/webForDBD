@@ -71,3 +71,8 @@ src/
 └── utils/
     └── tournamentStore.js   # LocalStorage-backed tournament post store
 ```
+# TODO
+
+- Add back end DB for articles
+- finish new coming features
+- Make gracefull tutorials and other text in most of informational pages

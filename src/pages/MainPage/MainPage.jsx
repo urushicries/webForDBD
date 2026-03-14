@@ -1,53 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import AnimatedText from '../../components/AnimatedText/AnimatedText';
 import styles from './MainPage.module.css';
 
-const HIGHLIGHTS = [
-  {
-    label: 'Big Leagues',
-    desc: 'Biggest leagues, tournaments there are in the competitive DBD scene.',
-    path: '/big-leagues',
-  },
-  {
-    label: 'Build Crafting',
-    desc: 'Make and share killer/survivor builds with automatic check for mistakes according to competitive rulesets.',
-    path: 'https://balancedbydaylight.com',
-    external: true,
-  },
-  {
-    label: 'Ranked',
-    desc: 'Track your MMR, match history, and climb the solo/team queue ladder.',
-    path: '/dbd-ranked',
-  },
-  {
-    label: '1v1 Ladder',
-    desc: 'One killer, one survivor. Climb the purest format in comp DBD.',
-    path: '/1v1-ladder',
-  },
-  {
-    label: 'Scrims',
-    desc: 'Organize practice sessions against other competitive teams.',
-    path: '/dbd-scrims',
-  },
-  {
-    label: 'Major Teams',
-    desc: 'Meet the organisations and rosters competing at the top of the comp DBD scene.',
-    path: '/major-teams',
-  },
-];
-
-const COMING_SOON = [
-  {
-    label: 'Team Finder',
-    desc: 'Match with players who share your role, skill band, and schedule.',
-  },
-  {
-    label: 'Stats Central',
-    desc: 'Aggregated performance data across killers, maps, and competitive formats.',
-  },
-];
-
 export default function MainPage() {
+  const { t } = useTranslation();
+  const highlights = t('mainPage.highlights', { returnObjects: true });
+  const coming = t('mainPage.coming', { returnObjects: true });
   return (
     <div className={styles.page}>
       {/* ── Hero ─────────────────────────────────────────────────────── */}
@@ -55,18 +14,18 @@ export default function MainPage() {
         <div className={styles.heroBg} aria-hidden="true" />
 
         <div className={styles.heroContent}>
-          <p className={styles.eyebrow}>Dead by Daylight · Competitive Hub</p>
+          <p className={styles.eyebrow}>{t('mainPage.eyebrow')}</p>
 
           <h1 id="hero-heading" className={styles.heroHeading}>
-            <AnimatedText text="COMP DBD PLACE"/>
+            <AnimatedText text={t('mainPage.heading')}/>
           </h1>
             <p className={styles.heroSub}>
-            Everything you need to know to start your way in competitive Dead by Daylight.
+            {t('mainPage.subtitle')}
           </p>
 
           <div className={styles.heroCta}>
             <Link to="/big-leagues" className={styles.ctaPrimary}>
-              View Tournaments
+              {t('mainPage.viewTournaments')}
             </Link>
           </div>
         </div>
@@ -78,36 +37,41 @@ export default function MainPage() {
       {/* ── Quick-access grid ────────────────────────────────────────── */}
       <section className={styles.grid} aria-label="Site sections">
         <div className={styles.gridInner}>
-          <h2 className={styles.gridTitle}>What's inside</h2>
+          <h2 className={styles.gridTitle}>{t('mainPage.whatsInside')}</h2>
           <ul className={styles.cards} role="list">
-            {HIGHLIGHTS.map(({ label, desc, path, external }) => (
-              <li key={path}>
-                {external ? (
-                  <a
-                    href={path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.card}
-                  >
-                    <span className={styles.cardLabel}>{label}</span>
-                    <span className={styles.cardDesc}>{desc}</span>
-                    <span className={styles.cardArrow} aria-hidden="true">→</span>
-                  </a>
-                ) : (
-                  <Link to={path} className={styles.card}>
-                    <span className={styles.cardLabel}>{label}</span>
-                    <span className={styles.cardDesc}>{desc}</span>
-                    <span className={styles.cardArrow} aria-hidden="true">→</span>
-                  </Link>
-                )}
-              </li>
-            ))}
+            {highlights.map(({ label, desc, path, external }, idx) => {
+              const defaultPaths = ['/big-leagues', 'https://balancedbydaylight.com', '/dbd-ranked', '/1v1-ladder', '/dbd-scrims', '/major-teams'];
+              const p = path || defaultPaths[idx];
+              const isExt = external || idx === 1;
+              return (
+                <li key={p}>
+                  {isExt ? (
+                    <a
+                      href={p}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.card}
+                    >
+                      <span className={styles.cardLabel}>{label}</span>
+                      <span className={styles.cardDesc}>{desc}</span>
+                      <span className={styles.cardArrow} aria-hidden="true">→</span>
+                    </a>
+                  ) : (
+                    <Link to={p} className={styles.card}>
+                      <span className={styles.cardLabel}>{label}</span>
+                      <span className={styles.cardDesc}>{desc}</span>
+                      <span className={styles.cardArrow} aria-hidden="true">→</span>
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
 
             {/* Coming-soon placeholder cards */}
-            {COMING_SOON.map(({ label, desc }) => (
+            {coming.map(({ label, desc }) => (
               <li key={label} aria-label={`${label} — coming soon`}>
                 <div className={styles.cardSoon}>
-                  <span className={styles.cardSoonBadge}>Soon, maybe</span>
+                  <span className={styles.cardSoonBadge}>{t('mainPage.soon')}</span>
                   <span className={styles.cardLabel}>{label}</span>
                   <span className={styles.cardDesc}>{desc}</span>
                 </div>
@@ -116,7 +80,7 @@ export default function MainPage() {
 
           </ul>
 
-          <p className={styles.moreSoon}>more coming soon, maybe</p>
+          <p className={styles.moreSoon}>{t('mainPage.moreSoon')}</p>
         </div>
       </section>
     </div>

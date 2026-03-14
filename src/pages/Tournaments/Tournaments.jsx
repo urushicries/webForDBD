@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getApprovedPosts } from '../../utils/tournamentStore';
 import styles from './Tournaments.module.css';
 
 export default function Tournaments() {
   const [posts, setPosts] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    setPosts(getApprovedPosts());
+    getApprovedPosts().then(setPosts).catch(console.error);
   }, []);
 
   return (
@@ -15,13 +17,13 @@ export default function Tournaments() {
       {/* ── Header ─────────────────────────────────────────────────── */}
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <p className={styles.tag}>Competitive DBD</p>
-          <h1 className={styles.title}>Tournaments</h1>
+          <p className={styles.tag}>{t('tournaments.tag')}</p>
+          <h1 className={styles.title}>{t('tournaments.title')}</h1>
           <p className={styles.subtitle}>
-            Community-posted tournament announcements, open brackets, and organised events.
+            {t('tournaments.subtitle')}
           </p>
           <Link to="/create-tournament" className={styles.postBtn}>
-            + Post a Tournament
+            {t('tournaments.postBtn')}
           </Link>
         </div>
         <div className={styles.headerRule} aria-hidden="true" />
@@ -32,11 +34,11 @@ export default function Tournaments() {
         <div className={styles.feedInner}>
           {posts.length === 0 ? (
             <div className={styles.empty}>
-              <p className={styles.emptyHeading}>No tournaments posted yet.</p>
+              <p className={styles.emptyHeading}>{t('tournaments.noTournaments')}</p>
               <p className={styles.emptySub}>
-                Be the first —{' '}
+                {t('tournaments.beFirst')}{' '}
                 <Link to="/create-tournament" className={styles.emptyLink}>
-                  post a tournament
+                  {t('tournaments.postTournament')}
                 </Link>
                 .
               </p>
@@ -55,7 +57,7 @@ export default function Tournaments() {
                       />
                     ) : (
                       <div className={styles.bannerPlaceholder} aria-hidden="true">
-                        <span className={styles.placeholderText}>No Image</span>
+                        <span className={styles.placeholderText}>{t('tournaments.noImage')}</span>
                       </div>
                     )}
                   </div>

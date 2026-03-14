@@ -1,75 +1,80 @@
-const STORAGE_KEY = 'comp_dbd_tournaments';
+import { getToken } from './authStore.js';
 
-/** @typedef {{ id: string, title: string, description: string, banner: string | null, status: 'pending' | 'approved' | 'denied', createdAt: number }} TournamentPost */
+const API = '/api/tournaments';
+
+/** @typedef {{ id: string, title: string, description: string, banner: string | null, status: 'pending' | 'approved' | 'denied', userId: string, createdAt: number }} TournamentPost */
+
+function getHeaders() {
+  const token = getToken();
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return headers;
+}
 
 /**
- * Return all stored posts (any status).
- * @returns {TournamentPost[]}
+ * Return all posts (any status), sorted newest first. Admin only.
+ * @returns {Promise<TournamentPost[]>}
  */
-export function getAllPosts() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
+export async function getAllPosts() {
+  const res = await fetch(API, { headers: getHeaders() });
+  if (!res.ok) throw new Error('Failed to fetch posts');
+  return res.json();
 }
 
 /**
  * Return only approved posts, sorted newest first.
- * @returns {TournamentPost[]}
+ * @returns {Promise<TournamentPost[]>}
  */
-export function getApprovedPosts() {
-  return getAllPosts()
-    .filter((p) => p.status === 'approved')
-    .sort((a, b) => b.createdAt - a.createdAt);
+export async function getApprovedPosts() {
+  const res = await fetch(`${API}/approved`);
+  if (!res.ok) throw new Error('Failed to fetch approved posts');
+  return res.json();
 }
 
 /**
- * Return pending posts, sorted oldest first (first-in-first-out review).
- * @returns {TournamentPost[]}
- */
-export function getPendingPosts() {
-  return getAllPosts()
-    .filter((p) => p.status === 'pending')
-    .sort((a, b) => a.createdAt - b.createdAt);
-}
-
-/**
- * Save a new post with status "pending".
+ * Submit a new post with status "pending".
  * @param {{ title: string, description: string, banner: string | null }} data
- * @returns {TournamentPost}
+ * @returns {Promise<TournamentPost>}
  */
-export function submitPost(data) {
-  const post = {
-    id: crypto.randomUUID(),
-    title: data.title.trim(),
-    description: data.description.trim(),
-    banner: data.banner ?? null,
-    status: 'pending',
-    createdAt: Date.now(),
-  };
-  const all = getAllPosts();
-  all.push(post);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  return post;
+export async function submitPost(data) {
+  const res = await fetch(API, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.error || 'Failed to submit post');
+  }
+  return res.json();
 }
 
 /**
- * Update a post's status.
+ * Update a post's status. Admin only.
  * @param {string} id
  * @param {'approved' | 'denied'} status
+ * @returns {Promise<void>}
  */
-export function updatePostStatus(id, status) {
-  const all = getAllPosts().map((p) => (p.id === id ? { ...p, status } : p));
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+export async function updatePostStatus(id, status) {
+  const res = await fetch(`${API}/${id}/status`, {
+    method: 'PATCH',
+    headers: getHeaders(),
+    body: JSON.stringify({ status }),
+  });
+  if (!res.ok) throw new Error('Failed to update post status');
 }
 
 /**
- * Permanently delete a post by id.
+ * Permanently delete a post by id. Admin only.
  * @param {string} id
+ * @returns {Promise<void>}
  */
-export function deletePost(id) {
-  const all = getAllPosts().filter((p) => p.id !== id);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+export async function deletePost(id) {
+  const res = await fetch(`${API}/${id}`, {
+    method: 'DELETE',
+    headers: getHeaders(),
+  });
+  if (!res.ok) throw new Error('Failed to delete post');
 }

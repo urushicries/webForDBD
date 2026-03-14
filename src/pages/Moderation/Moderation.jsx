@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   getAllPosts,
   updatePostStatus,
@@ -6,43 +7,55 @@ import {
 } from '../../utils/tournamentStore';
 import styles from './Moderation.module.css';
 
-const STATUS_LABELS = {
-  pending:  'Pending',
-  approved: 'Approved',
-  denied:   'Denied',
-};
-
 const FILTERS = ['all', 'pending', 'approved', 'denied'];
+
+const FILTER_LABELS = {
+  all: 'moderation.all',
+  pending: 'moderation.pending',
+  approved: 'moderation.approved',
+  denied: 'moderation.denied',
+};
 
 export default function Moderation() {
   const [posts, setPosts]       = useState([]);
   const [filter, setFilter]     = useState('pending');
   const [confirm, setConfirm]   = useState(null); // { id, action: 'approve'|'deny'|'delete' }
+  const { t } = useTranslation();
 
-  const refresh = useCallback(() => {
-    const all = getAllPosts().sort((a, b) => b.createdAt - a.createdAt);
-    setPosts(all);
+  const STATUS_LABELS = {
+    pending:  t('moderation.pending'),
+    approved: t('moderation.approved'),
+    denied:   t('moderation.denied'),
+  };
+
+  const refresh = useCallback(async () => {
+    try {
+      const all = await getAllPosts();
+      setPosts(all); // server returns sorted DESC by createdAt
+    } catch (err) {
+      console.error('Failed to load posts:', err);
+    }
   }, []);
 
   useEffect(() => {
     refresh();
   }, [refresh]);
 
-  function handleApprove(id) {
-    updatePostStatus(id, 'approved');
-    refresh();
+  async function handleApprove(id) {
+    await updatePostStatus(id, 'approved');
+    await refresh();
     setConfirm(null);
   }
 
-  function handleDeny(id) {
-    updatePostStatus(id, 'denied');
-    refresh();
+  async function handleDeny(id) {
+    await updatePostStatus(id, 'denied');
+    await refresh();
     setConfirm(null);
   }
 
-  function handleDelete(id) {
-    deletePost(id);
-    refresh();
+  async function handleDelete(id) {
+    await deletePost(id);
+    await refresh();
     setConfirm(null);
   }
 
@@ -62,11 +75,10 @@ export default function Moderation() {
       {/* ── Header ────────────────────────────────────────────────── */}
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <p className={styles.tag}>Admin</p>
-          <h1 className={styles.title}>Moderation</h1>
+          <p className={styles.tag}>{t('moderation.tag')}</p>
+          <h1 className={styles.title}>{t('moderation.title')}</h1>
           <p className={styles.subtitle}>
-            Review tournament posts submitted by the community. Approve to publish,
-            deny to reject, or delete permanently.
+            {t('moderation.subtitle')}
           </p>
         </div>
         <div className={styles.headerRule} aria-hidden="true" />
@@ -85,7 +97,7 @@ export default function Moderation() {
                 className={`${styles.filterBtn} ${filter === f ? styles.filterBtnActive : ''}`}
                 onClick={() => setFilter(f)}
               >
-                <span className={styles.filterLabel}>{f === 'all' ? 'All' : STATUS_LABELS[f]}</span>
+                <span className={styles.filterLabel}>{t(FILTER_LABELS[f])}</span>
                 <span className={`${styles.filterBadge} ${styles[`badge_${f}`]}`}>
                   {counts[f]}
                 </span>
@@ -96,7 +108,7 @@ export default function Moderation() {
           {/* Post list */}
           {visible.length === 0 ? (
             <div className={styles.empty}>
-              <p>No {filter === 'all' ? '' : filter} posts.</p>
+              <p>{t('moderation.noPosts')}</p>
             </div>
           ) : (
             <ul className={styles.postList} role="list">
@@ -121,7 +133,7 @@ export default function Moderation() {
                     </div>
                     <p className={styles.postDesc}>{post.description}</p>
                     <p className={styles.postDate}>
-                      Submitted{' '}
+                      {t('moderation.submitted')}{' '}
                       {new Date(post.createdAt).toLocaleDateString('en-GB', {
                         day: 'numeric',
                         month: 'long',
@@ -138,7 +150,7 @@ export default function Moderation() {
                         className={styles.btnApprove}
                         onClick={() => setConfirm({ id: post.id, action: 'approve' })}
                       >
-                        Approve
+                        {t('moderation.approve')}
                       </button>
                     )}
                     {post.status !== 'denied' && (
@@ -147,7 +159,7 @@ export default function Moderation() {
                         className={styles.btnDeny}
                         onClick={() => setConfirm({ id: post.id, action: 'deny' })}
                       >
-                        Deny
+                        {t('moderation.deny')}
                       </button>
                     )}
                     <button
@@ -155,7 +167,7 @@ export default function Moderation() {
                       className={styles.btnDelete}
                       onClick={() => setConfirm({ id: post.id, action: 'delete' })}
                     >
-                      Delete
+                      {t('moderation.delete')}
                     </button>
                   </div>
                 </li>
@@ -176,14 +188,14 @@ export default function Moderation() {
         >
           <div className={styles.dialog}>
             <h3 id="confirm-heading" className={styles.dialogTitle}>
-              {confirm.action === 'approve' && 'Approve Post?'}
-              {confirm.action === 'deny'    && 'Deny Post?'}
-              {confirm.action === 'delete'  && 'Delete Post?'}
+              {confirm.action === 'approve' && t('moderation.approvePost')}
+              {confirm.action === 'deny'    && t('moderation.denyPost')}
+              {confirm.action === 'delete'  && t('moderation.deletePost')}
             </h3>
             <p className={styles.dialogBody}>
-              {confirm.action === 'approve' && 'This post will be published on the Tournaments page.'}
-              {confirm.action === 'deny'    && 'This post will be rejected and hidden from the public feed.'}
-              {confirm.action === 'delete'  && 'This post will be permanently removed and cannot be recovered.'}
+              {confirm.action === 'approve' && t('moderation.approveDesc')}
+              {confirm.action === 'deny'    && t('moderation.denyDesc')}
+              {confirm.action === 'delete'  && t('moderation.deleteDesc')}
             </p>
             <div className={styles.dialogActions}>
               <button
@@ -191,7 +203,7 @@ export default function Moderation() {
                 className={styles.btnGhost}
                 onClick={() => setConfirm(null)}
               >
-                Cancel
+                {t('moderation.cancel')}
               </button>
               <button
                 type="button"
@@ -208,9 +220,9 @@ export default function Moderation() {
                   if (confirm.action === 'delete')  handleDelete(confirm.id);
                 }}
               >
-                {confirm.action === 'approve' && 'Yes, Approve'}
-                {confirm.action === 'deny'    && 'Yes, Deny'}
-                {confirm.action === 'delete'  && 'Yes, Delete'}
+                {confirm.action === 'approve' && t('moderation.yesApprove')}
+                {confirm.action === 'deny'    && t('moderation.yesDeny')}
+                {confirm.action === 'delete'  && t('moderation.yesDelete')}
               </button>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import styles from './MajorTeams.module.css';
 
 import invictusImg  from '../../imgs/invictus.webp';
@@ -61,15 +62,17 @@ const TEAMS = [
 ];
 
 export default function MajorTeams() {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.page}>
       {/* ── Page Header ───────────────────────────────────────────── */}
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <p className={styles.tag}>Competitive DBD</p>
-          <h1 className={styles.title}>Major Teams</h1>
+          <p className={styles.tag}>{t('majorTeams.tag')}</p>
+          <h1 className={styles.title}>{t('majorTeams.title')}</h1>
           <p className={styles.subtitle}>
-                Top 8 teams, they made to main stage of the biggest tournament of winter, DBDLeague Winter Circuit, and they are the best of the best, probably...
+                {t('majorTeams.subtitle')}
           </p>
         </div>
         <div className={styles.headerRule} aria-hidden="true" />
@@ -109,7 +112,7 @@ export default function MajorTeams() {
 
       {/* ── Coming Soon ───────────────────────────────────────────── */}
       <div className={styles.comingSoon}>
-        <p className={styles.comingSoonText}>Full rosters and stats launching soon — stay tuned.</p>
+        <p className={styles.comingSoonText}>{t('majorTeams.comingSoon')}</p>
       </div>
     </div>
   );

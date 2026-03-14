@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import styles from './SectionPage.module.css';
 
 
 export default function SectionPage({ title, subtitle, tag = 'Comp DBD', items = [] }) {
+  const { t } = useTranslation();
   return (
     <div className={styles.page}>
       {/* ── Page Header ──────────────────────────────────────────── */}
@@ -61,7 +63,7 @@ export default function SectionPage({ title, subtitle, tag = 'Comp DBD', items =
 
       {/* ── Coming Soon Banner ───────────────────────────────────── */}
       <div className={styles.comingSoon}>
-        <p className={styles.comingSoonText}>i might add all that in future</p>
+        <p className={styles.comingSoonText}>{t('sectionPage.comingSoon')}</p>
       </div>
     </div>
   );

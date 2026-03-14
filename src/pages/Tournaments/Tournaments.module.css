@@ -127,7 +127,8 @@
 /* ── Post Card ───────────────────────────────────────────────────────── */
 .postCard {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 300px 1fr;
+  min-height: 260px;
   background-color: var(--bg-elevated);
   border-bottom: 1px solid var(--divider-strong);
   transition: background-color var(--transition-normal);
@@ -143,8 +144,8 @@
 
 /* ── Banner ──────────────────────────────────────────────────────────── */
 .bannerWrap {
-  aspect-ratio: 16 / 9;
-  width: 320px;
+  aspect-ratio: 4 / 3;
+  width: 300px;
   position: relative;
   overflow: hidden;
   background-color: var(--bg-primary);

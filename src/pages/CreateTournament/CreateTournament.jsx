@@ -1,11 +1,13 @@
 import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { submitPost } from '../../utils/tournamentStore';
+import { useTranslation } from 'react-i18next';
+import { submitPost, uploadImage } from '../../utils/tournamentStore';
 import styles from './CreateTournament.module.css';
 
 export default function CreateTournament() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const { t } = useTranslation();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -19,11 +21,11 @@ export default function CreateTournament() {
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      setErrors((prev) => ({ ...prev, banner: 'File must be an image.' }));
+      setErrors((prev) => ({ ...prev, banner: t('createTournament.errors.bannerFileType') }));
       return;
     }
     if (file.size > 4 * 1024 * 1024) {
-      setErrors((prev) => ({ ...prev, banner: 'Image must be smaller than 4 MB.' }));
+      setErrors((prev) => ({ ...prev, banner: t('createTournament.errors.bannerSize') }));
       return;
     }
 
@@ -44,14 +46,14 @@ export default function CreateTournament() {
 
   function validate() {
     const errs = {};
-    if (!title.trim()) errs.title = 'Tournament name is required.';
-    else if (title.trim().length > 100) errs.title = 'Name must be 100 characters or fewer.';
-    if (!description.trim()) errs.description = 'Description is required.';
-    else if (description.trim().length > 1200) errs.description = 'Description must be 1200 characters or fewer.';
+    if (!title.trim()) errs.title = t('createTournament.errors.titleRequired');
+    else if (title.trim().length > 100) errs.title = t('createTournament.errors.titleLength');
+    if (!description.trim()) errs.description = t('createTournament.errors.descRequired');
+    else if (description.trim().length > 1200) errs.description = t('createTournament.errors.descLength');
     return errs;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) {
@@ -59,8 +61,12 @@ export default function CreateTournament() {
       return;
     }
 
-    submitPost({ title, description, banner: bannerData });
-    setSubmitted(true);
+    try {
+      await submitPost({ title, description, banner: bannerData });
+      setSubmitted(true);
+    } catch {
+      setErrors((prev) => ({ ...prev, submit: t('createTournament.errors.submitFailed') }));
+    }
   }
 
   if (submitted) {
@@ -69,14 +75,13 @@ export default function CreateTournament() {
         <div className={styles.successWrap}>
           <div className={styles.successCard}>
             <p className={styles.successIcon} aria-hidden="true">✓</p>
-            <h2 className={styles.successHeading}>Post Submitted</h2>
+            <h2 className={styles.successHeading}>{t('createTournament.successHeading')}</h2>
             <p className={styles.successSub}>
-              Your tournament ad has been sent for moderation. It will appear on the
-              Tournaments page once approved.
+              {t('createTournament.successSub')}
             </p>
             <div className={styles.successActions}>
               <Link to="/tournaments" className={styles.btnPrimary}>
-                Back to Tournaments
+                {t('createTournament.backTournaments')}
               </Link>
               <button
                 type="button"
@@ -90,7 +95,7 @@ export default function CreateTournament() {
                   setSubmitted(false);
                 }}
               >
-                Submit Another
+                {t('createTournament.submitAnother')}
               </button>
             </div>
           </div>
@@ -104,11 +109,10 @@ export default function CreateTournament() {
       {/* ── Header ──────────────────────────────────────────────── */}
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <p className={styles.tag}>Competitive DBD</p>
-          <h1 className={styles.title}>Post a Tournament</h1>
+          <p className={styles.tag}>{t('createTournament.tag')}</p>
+          <h1 className={styles.title}>{t('createTournament.title')}</h1>
           <p className={styles.subtitle}>
-            Fill in the details below. Posts go through a quick moderation review
-            before appearing publicly.
+            {t('createTournament.subtitle')}
           </p>
         </div>
         <div className={styles.headerRule} aria-hidden="true" />
@@ -125,8 +129,8 @@ export default function CreateTournament() {
           >
             {/* Banner upload */}
             <div className={styles.field}>
-              <label className={styles.label}>Banner Image</label>
-              <p className={styles.hint}>Optional · max 4 MB · any common image format</p>
+              <label className={styles.label}>{t('createTournament.bannerImage')}</label>
+              <p className={styles.hint}>{t('createTournament.bannerHint')}</p>
 
               {bannerPreview ? (
                 <div className={styles.previewWrap}>
@@ -139,9 +143,9 @@ export default function CreateTournament() {
                     type="button"
                     className={styles.removeImgBtn}
                     onClick={removeImage}
-                    aria-label="Remove image"
+                    aria-label={t('createTournament.removeImage')}
                   >
-                    ✕ Remove
+                    {t('createTournament.removeImage')}
                   </button>
                 </div>
               ) : (
@@ -151,7 +155,7 @@ export default function CreateTournament() {
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <span className={styles.uploadIcon} aria-hidden="true">↑</span>
-                  Choose Image
+                  {t('createTournament.chooseImage')}
                 </button>
               )}
 
@@ -170,7 +174,7 @@ export default function CreateTournament() {
             {/* Title */}
             <div className={styles.field}>
               <label htmlFor="title" className={styles.label}>
-                Tournament Name <span className={styles.required}>*</span>
+                {t('createTournament.tournamentName')} <span className={styles.required}>{t('createTournament.required')}</span>
               </label>
               <input
                 id="title"
@@ -181,7 +185,7 @@ export default function CreateTournament() {
                   setTitle(e.target.value);
                   setErrors((prev) => ({ ...prev, title: undefined }));
                 }}
-                placeholder="e.g. DBD Winter Invitational 2026"
+                placeholder={t('createTournament.placeholder')}
                 maxLength={100}
                 aria-describedby={errors.title ? 'title-error' : undefined}
               />
@@ -198,7 +202,7 @@ export default function CreateTournament() {
             {/* Description */}
             <div className={styles.field}>
               <label htmlFor="description" className={styles.label}>
-                Description <span className={styles.required}>*</span>
+                {t('createTournament.description')} <span className={styles.required}>{t('createTournament.required')}</span>
               </label>
               <textarea
                 id="description"
@@ -208,7 +212,7 @@ export default function CreateTournament() {
                   setDescription(e.target.value);
                   setErrors((prev) => ({ ...prev, description: undefined }));
                 }}
-                placeholder="Format, dates, bracket size, sign-up link, prize pool..."
+                placeholder={t('createTournament.descPlaceholder')}
                 maxLength={1200}
                 rows={7}
                 aria-describedby={errors.description ? 'desc-error' : undefined}
@@ -224,12 +228,13 @@ export default function CreateTournament() {
             </div>
 
             {/* Actions */}
+            {errors.submit && <p className={styles.error}>{errors.submit}</p>}
             <div className={styles.actions}>
               <Link to="/tournaments" className={styles.btnGhost}>
-                Cancel
+                {t('createTournament.cancel')}
               </Link>
               <button type="submit" className={styles.btnPrimary}>
-                Submit for Review
+                {t('createTournament.submitReview')}
               </button>
             </div>
           </form>

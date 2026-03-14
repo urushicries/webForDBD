@@ -1,28 +1,40 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { isAuthenticated, getCurrentUser, logout } from '../../utils/authStore';
 import styles from './TopBar.module.css';
 
 const NAV_LINKS = [
-  { label: 'Main',             path: '/' },
-  { label: 'Big Leagues',      path: '/big-leagues' },
-  { label: 'Make Your Builds', path: 'https://balancedbydaylight.com', external: true },
-  { label: 'DBD Scrims',       path: '/dbd-scrims' },
-  { label: 'DBD Ranked',       path: '/dbd-ranked' },
-  { label: '1v1 Ladder',       path: '/1v1-ladder' },
-  { label: 'Major Teams',      path: '/major-teams' },
-  { label: 'Tutorials',        path: '/tutorials' },
-  { label: 'Tournaments',      path: '/tournaments' },
-  { label: 'Moderation',       path: '/moderation' },
+  { labelKey: 'nav.main',             path: '/' },
+  { labelKey: 'nav.bigLeagues',      path: '/big-leagues' },
+  { labelKey: 'nav.makeYourBuilds', path: 'https://balancedbydaylight.com', external: true },
+  { labelKey: 'nav.dbdScrims',       path: '/dbd-scrims' },
+  { labelKey: 'nav.dbdRanked',       path: '/dbd-ranked' },
+  { labelKey: 'nav.1v1Ladder',       path: '/1v1-ladder' },
+  { labelKey: 'nav.majorTeams',      path: '/major-teams' },
+  { labelKey: 'nav.tutorials',        path: '/tutorials' },
+  { labelKey: 'nav.tournaments',      path: '/tournaments' },
+  { labelKey: 'nav.moderation',       path: '/moderation', adminOnly: true },
 ];
 
 export default function TopBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAuth, setIsAuth] = useState(isAuthenticated());
+  const [user, setUser] = useState(getCurrentUser());
+  const { t, i18n } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
+
+  // Update auth state on location change
+  useEffect(() => {
+    setIsAuth(isAuthenticated());
+    setUser(getCurrentUser());
+  }, [location]);
 
   // Close mobile menu on Escape key
   useEffect(() => {
@@ -32,6 +44,32 @@ export default function TopBar() {
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
   }, []);
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'ru' : 'en';
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('language', newLang);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsAuth(false);
+    setUser(null);
+    setMenuOpen(false);
+    navigate('/');
+  };
+
+  // Filter nav links based on auth status
+  const getVisibleLinks = () => {
+    return NAV_LINKS.filter(link => {
+      if (link.adminOnly) {
+        return isAuth && user?.role === 'admin';
+      }
+      return true;
+    });
+  };
+
+  const visibleLinks = getVisibleLinks();
 
   return (
     <header className={styles.topbar} role="banner">
@@ -44,7 +82,7 @@ export default function TopBar() {
         {/* Desktop nav */}
         <nav className={styles.nav} aria-label="Main navigation">
           <ul className={styles.navList} role="list">
-            {NAV_LINKS.map(({ label, path, external }) => (
+            {visibleLinks.map(({ labelKey, path, external }) => (
               <li key={path}>
                 {external ? (
                   <a
@@ -53,7 +91,7 @@ export default function TopBar() {
                     rel="noopener noreferrer"
                     className={styles.navLink}
                   >
-                    {label}
+                    {t(labelKey)}
                   </a>
                 ) : (
                   <NavLink
@@ -63,7 +101,7 @@ export default function TopBar() {
                       `${styles.navLink} ${isActive ? styles.active : ''}`
                     }
                   >
-                    {label}
+                    {t(labelKey)}
                   </NavLink>
                 )}
               </li>
@@ -71,19 +109,55 @@ export default function TopBar() {
           </ul>
         </nav>
 
-        {/* Hamburger (mobile only) */}
-        <button
-          className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          {/* Three bars rendered via CSS */}
-          <span className={styles.bar} />
-          <span className={styles.bar} />
-          <span className={styles.bar} />
-        </button>
+        {/* Language toggle + Auth + Hamburger */}
+        <div className={styles.rightControls}>
+          {isAuth && user && (
+            <div className={styles.userInfo}>
+              <span className={styles.username}>{user.username}</span>
+              {user.role === 'admin' && <span className={styles.adminBadge}>ADMIN</span>}
+            </div>
+          )}
+
+          {isAuth ? (
+            <button
+              className={styles.authBtn}
+              onClick={handleLogout}
+              title={t('auth.logout')}
+            >
+              {t('auth.logout')}
+            </button>
+          ) : (
+            <NavLink
+              to="/auth"
+              className={styles.authBtn}
+              title={t('auth.login')}
+            >
+              {t('auth.login')}
+            </NavLink>
+          )}
+
+          <button
+            className={styles.langBtn}
+            onClick={toggleLanguage}
+            aria-label={`Switch to ${i18n.language === 'en' ? 'Russian' : 'English'}`}
+            title={t('common.language')}
+          >
+            {i18n.language === 'en' ? 'РУ' : 'EN'}
+          </button>
+
+          <button
+            className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            {/* Three bars rendered via CSS */}
+            <span className={styles.bar} />
+            <span className={styles.bar} />
+            <span className={styles.bar} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile drawer */}
@@ -94,7 +168,7 @@ export default function TopBar() {
         aria-hidden={!menuOpen}
       >
         <ul className={styles.mobileList} role="list">
-          {NAV_LINKS.map(({ label, path, external }) => (
+          {visibleLinks.map(({ labelKey, path, external }) => (
             <li key={path}>
               {external ? (
                 <a
@@ -104,7 +178,7 @@ export default function TopBar() {
                   className={styles.mobileLink}
                   tabIndex={menuOpen ? 0 : -1}
                 >
-                  {label}
+                  {t(labelKey)}
                 </a>
               ) : (
                 <NavLink
@@ -115,7 +189,7 @@ export default function TopBar() {
                   }
                   tabIndex={menuOpen ? 0 : -1}
                 >
-                  {label}
+                  {t(labelKey)}
                 </NavLink>
               )}
             </li>

@@ -10,6 +10,8 @@ import MajorTeams from './pages/MajorTeams/MajorTeams';
 import Tournaments from './pages/Tournaments/Tournaments';
 import CreateTournament from './pages/CreateTournament/CreateTournament';
 import Moderation from './pages/Moderation/Moderation';
+import Auth from './pages/Auth/Auth';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 export default function App() {
   return (
@@ -25,7 +27,8 @@ export default function App() {
           <Route path="/major-teams"       element={<MajorTeams />} />
           <Route path="/tournaments"         element={<Tournaments />} />
           <Route path="/create-tournament"   element={<CreateTournament />} />
-          <Route path="/moderation"          element={<Moderation />} />
+          <Route path="/auth"                element={<Auth />} />
+          <Route path="/moderation"          element={<ProtectedRoute adminOnly><Moderation /></ProtectedRoute>} />
         </Routes>
       </Layout>
     </BrowserRouter>

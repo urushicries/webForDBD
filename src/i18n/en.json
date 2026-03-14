@@ -1,0 +1,315 @@
+{
+  "nav": {
+    "main": "Main",
+    "bigLeagues": "Big Leagues",
+    "makeYourBuilds": "Make Your Builds",
+    "dbdScrims": "DBD Scrims",
+    "dbdRanked": "DBD Ranked",
+    "1v1Ladder": "1v1 Ladder",
+    "majorTeams": "Major Teams",
+    "tutorials": "Tutorials",
+    "tournaments": "Tournaments",
+    "moderation": "Moderation"
+  },
+  "common": {
+    "competitiveDBD": "Competitive DBD",
+    "admin": "Admin",
+    "language": "Language",
+    "english": "English",
+    "russian": "Русский"
+  },
+  "mainPage": {
+    "eyebrow": "Dead by Daylight · Competitive Hub",
+    "heading": "COMP DBD PLACE",
+    "subtitle": "Everything you need to know to start your way in competitive Dead by Daylight.",
+    "viewTournaments": "View Tournaments",
+    "whatsInside": "What's inside",
+    "moreSoon": "more coming soon, maybe",
+    "highlights": [
+      {
+        "label": "Big Leagues",
+        "desc": "Biggest leagues, tournaments there are in the competitive DBD scene."
+      },
+      {
+        "label": "Build Crafting",
+        "desc": "Make and share killer/survivor builds with automatic check for mistakes according to competitive rulesets."
+      },
+      {
+        "label": "Ranked",
+        "desc": "Track your MMR, match history, and climb the solo/team queue ladder."
+      },
+      {
+        "label": "1v1 Ladder",
+        "desc": "One killer, one survivor. Climb the purest format in comp DBD."
+      },
+      {
+        "label": "Scrims",
+        "desc": "Organize practice sessions against other competitive teams."
+      },
+      {
+        "label": "Major Teams",
+        "desc": "Meet the organisations and rosters competing at the top of the comp DBD scene."
+      }
+    ],
+    "coming": [
+      {
+        "label": "Team Finder",
+        "desc": "Match with players who share your role, skill band, and schedule."
+      },
+      {
+        "label": "Stats Central",
+        "desc": "Aggregated performance data across killers, maps, and competitive formats."
+      }
+    ],
+    "soon": "Soon, maybe"
+  },
+  "tournaments": {
+    "tag": "Competitive DBD",
+    "title": "Tournaments",
+    "subtitle": "Community-posted tournament announcements, open brackets, and organised events.",
+    "postBtn": "+ Post a Tournament",
+    "noTournaments": "No tournaments posted yet.",
+    "beFirst": "Be the first —",
+    "postTournament": "post a tournament",
+    "noImage": "No Image"
+  },
+  "createTournament": {
+    "tag": "Competitive DBD",
+    "title": "Post a Tournament",
+    "subtitle": "Fill in the details below. Posts go through a quick moderation review before appearing publicly.",
+    "bannerImage": "Banner Image",
+    "bannerHint": "Optional · max 4 MB · any common image format",
+    "chooseImage": "Choose Image",
+    "removeImage": "✕ Remove",
+    "tournamentName": "Tournament Name",
+    "required": "*",
+    "description": "Description",
+    "cancel": "Cancel",
+    "submitReview": "Submit for Review",
+    "successHeading": "Post Submitted",
+    "successSub": "Your tournament ad has been sent for moderation. It will appear on the Tournaments page once approved.",
+    "backTournaments": "Back to Tournaments",
+    "submitAnother": "Submit Another",
+    "placeholder": "e.g. DBD Winter Invitational 2026",
+    "descPlaceholder": "Format, dates, bracket size, sign-up link, prize pool...",
+    "errors": {
+      "titleRequired": "Tournament name is required.",
+      "titleLength": "Name must be 100 characters or fewer.",
+      "descRequired": "Description is required.",
+      "descLength": "Description must be 1200 characters or fewer.",
+      "bannerFileType": "File must be an image.",
+      "bannerSize": "Image must be smaller than 4 MB.",
+      "submitFailed": "Submission failed. Please try again."
+    }
+  },
+  "moderation": {
+    "tag": "Admin",
+    "title": "Moderation",
+    "subtitle": "Review tournament posts submitted by the community. Approve to publish, deny to reject, or delete permanently.",
+    "all": "All",
+    "pending": "Pending",
+    "approved": "Approved",
+    "denied": "Denied",
+    "noPosts": "No posts.",
+    "approve": "Approve",
+    "deny": "Deny",
+    "delete": "Delete",
+    "submitted": "Submitted",
+    "approvePost": "Approve Post?",
+    "denyPost": "Deny Post?",
+    "deletePost": "Delete Post?",
+    "approveDesc": "This post will be published on the Tournaments page.",
+    "denyDesc": "This post will be rejected and hidden from the public feed.",
+    "deleteDesc": "This post will be permanently removed and cannot be recovered.",
+    "cancel": "Cancel",
+    "yesApprove": "Yes, Approve",
+    "yesDeny": "Yes, Deny",
+    "yesDelete": "Yes, Delete"
+  },
+  "bigLeagues": {
+    "title": "Big Leagues",
+    "subtitle": "High-stakes Dead by Daylight tournaments. Track brackets, VODs, standings, and team profiles for every comp event.",
+    "tag": "Tournaments",
+    "items": [
+      {
+        "headline": "DBDLeague",
+        "body": "The premier competitive league for Dead by Daylight. Featuring top-tier teams, high-stakes matches, and comprehensive coverage of every seasons tournament action."
+      },
+      {
+        "headline": "Hens333 Tournament Series",
+        "body": "Swiss group stage feeds into a single-elimination playoff. Streamer-friendly format with a focus on exciting matchups and upsets."
+      },
+      {
+        "headline": "Altruism league",
+        "body": "A community-driven competitive format that emphasizes teamwork and strategic coordination over individual skill. Teams are matched based on their overall performance and commitment to the community."
+      },
+      {
+        "headline": "COTF",
+        "body": "Champions of the Fog is a grassroots tournament series that has grown into a major fixture in the comp DBD scene. Known for its passionate community and high production values."
+      },
+      {
+        "headline": "Rasza official",
+        "body": "Raszas official tournament series, featuring a mix of open qualifiers and invite-only events. Known for its high level of competition and engaging commentary."
+      }
+    ]
+  },
+  "dbdRanked": {
+    "title": "DBD Ranked",
+    "subtitle": "Compete in structured solo queue with transparent MMR, detailed match history, and seasonal leaderboards.",
+    "tag": "Ranked Ladder",
+    "items": [
+      {
+        "headline": "Solo Queue Ladder",
+        "body": "Ranked solo play with MMR-based matchmaking. Climb from Bronze to Grand Master across a 10-season competitive year. Season resets with soft rank decay."
+      },
+      {
+        "headline": "Match History & Stats",
+        "body": "Detailed breakdowns of every ranked game: kills, escapes, hook counts, generator progression, and end-game score. Filterable by killer or survivor."
+      },
+      {
+        "headline": "MMR Transparency",
+        "body": "See your hidden matchmaking rating alongside visible rank. Track how individual performance metrics affect MMR gain and loss per match."
+      },
+      {
+        "headline": "Peak Rank Profiles",
+        "body": "Public player profiles display seasonal peak ranks, main roles, most-played killers, and recent performance trends."
+      },
+      {
+        "headline": "Leaderboards",
+        "body": "Global and region-specific leaderboards updated every 24 hours. Compare your position among the top 1,000 players worldwide."
+      }
+    ]
+  },
+  "dbdScrims": {
+    "title": "DBD Scrims",
+    "subtitle": "Find opponents, schedule practice sessions, and build your team's structured competitive preparation regimen.",
+    "tag": "Practice",
+    "items": [
+      {
+        "headline": "Open Scrim Lobbies",
+        "body": "Browse teams currently seeking opponents. Filter by region, skill band, and preferred killer pool. Join or post a scrim request in under 30 seconds."
+      },
+      {
+        "headline": "Scheduled Practice Blocks",
+        "body": "Book recurring weekly slots with the same team for consistent structured practice. Automated reminders sent before each session."
+      },
+      {
+        "headline": "Custom Rule Sets",
+        "body": "Run scrims under standard comp rules, relaxed ruleset, or create a custom ruleset for team-internal drills. Exported to easily share with opponents."
+      },
+      {
+        "headline": "Post-Scrim Review",
+        "body": "Attach notes, screenshots, or VOD timestamps after each session. Build a review archive to track team-specific habits and counter-strategies."
+      },
+      {
+        "headline": "Team Roster Management",
+        "body": "Manage your full five-player roster, substitutes, and roles. Invite players via username lookup or shareable link."
+      }
+    ]
+  },
+  "1v1Ladder": {
+    "title": "1v1 DBD Ladder",
+    "subtitle": "Solo killer versus solo survivor. Climb the most unforgiving format in competitive Dead by Daylight — no teammates, no excuses.",
+    "tag": "1v1 Ladder",
+    "items": [
+      {
+        "headline": "1v1 Format",
+        "body": "One killer versus one survivor. Controlled map pool, fixed perk restrictions, and a best-of-three structure. Pure mechanics — no team coordination to hide behind."
+      },
+      {
+        "headline": "Ladder & Rankings",
+        "body": "Earn MMR with every match. The ladder resets seasonally, with the top 32 players qualifying for the end-of-season invitational bracket."
+      },
+      {
+        "headline": "Map & Perk Ruleset",
+        "body": "Agreed-upon map veto before each series. A curated ban list removes overperforming add-ons and offering stacks to keep results skill-dependent."
+      },
+      {
+        "headline": "Match Submission",
+        "body": "Submit results via screenshot or short clip. Disputed outcomes are reviewed within 24 hours by a volunteer moderator panel."
+      },
+      {
+        "headline": "Hall of Fame",
+        "body": "Seasonal champions and peak-rank holders are preserved in the Hall of Fame. Filter by killer main, region, or season number."
+      }
+    ]
+  },
+  "majorTeams": {
+    "tag": "Competitive DBD",
+    "title": "Major Teams",
+    "subtitle": "Top 8 teams, they made to main stage of the biggest tournament of winter, DBDLeague Winter Circuit, and they are the best of the best, probably...",
+    "comingSoon": "Full rosters and stats launching soon — stay tuned."
+  },
+  "tutorials": {
+    "title": "Tutorials",
+    "subtitle": "Structured guides to sharpen every dimension of your competitive game — from fundamentals to frame-data deep dives.",
+    "tag": "Education",
+    "items": [
+      {
+        "headline": "Killer Fundamentals",
+        "body": "Core mechanics every competitive killer must master: patrol routing, mind-game techniques, pressure management, and map-specific strategies."
+      },
+      {
+        "headline": "Survivor Coordination",
+        "body": "How to communicate efficiently with three teammates, split generator assignments, and execute last-minute escapes under pressure."
+      },
+      {
+        "headline": "Advanced Chase Techniques",
+        "body": "Frame-perfect vaults, dead-hard timings, head-on setups, and looping strong tiles against top-tier killers. Annotated VOD clips included."
+      },
+      {
+        "headline": "Competitive Ruleset Primer",
+        "body": "A complete breakdown of banned perks, add-ons, offerings, and map restrictions used across major tournaments. Required reading before entering any bracket."
+      },
+      {
+        "headline": "VOD Review Methodology",
+        "body": "How to analyze your own film: what to look for, how to identify decision errors, and how to structure a productive post-game review session."
+      }
+    ]
+  },
+  "makeYourBuilds": {
+    "title": "Make Your Builds",
+    "subtitle": "Craft, compare, and share competitive loadouts. Explore perk synergies and community-vetted builds for every playstyle.",
+    "tag": "Build Crafting",
+    "items": [
+      {
+        "headline": "Perk Synergy Tool",
+        "body": "Select perks, add-ons, and offerings for any killer or survivor. The tool highlights known synergies and flags perk slot conflicts used in competitive rulesets."
+      },
+      {
+        "headline": "Meta Tier List",
+        "body": "Community-driven tier rankings updated after each patch. Breaks down which perks are viable in tournament settings versus solo queue."
+      },
+      {
+        "headline": "Shared Build Library",
+        "body": "Browse and clone builds submitted by top-ranked players. Filter by killer, role, playstyle, or tournament legality."
+      },
+      {
+        "headline": "Patch Tracker",
+        "body": "Every balance change annotated with competitive impact ratings. Know immediately when a previously banned perk becomes tourney-legal."
+      },
+      {
+        "headline": "Submit Your Build",
+        "body": "Share your loadout with the community. Attach a match replay or VOD clip demonstrating the build in action. Open for peer review."
+      }
+    ]
+  },
+  "sectionPage": {
+    "comingSoon": "i might add all that in future"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "noAccount": "Don't have an account? ",
+    "haveAccount": "Already have an account? ",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "loginRequired": "You must be logged in to access this page.",
+    "adminRequired": "Admin access required.",
+    "invalidCredentials": "Invalid username or password."
+  }
+}

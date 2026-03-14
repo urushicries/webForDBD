@@ -222,7 +222,7 @@
   }
 
   .teamDesc {
-    -webkit-line-clamp: 6;
-    line-clamp: 6;
+    -webkit-line-clamp: 999;
+    line-clamp: 999;
   }
 }

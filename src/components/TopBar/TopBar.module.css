@@ -246,7 +246,8 @@
   right: 0;
   background-color: var(--bg-elevated);
   border-bottom: 1px solid var(--divider-strong);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   max-height: 0;
   transition: max-height var(--transition-normal), opacity var(--transition-normal);
   opacity: 0;
@@ -254,7 +255,7 @@
 }
 
 .mobileMenuOpen {
-  max-height: 400px;
+  max-height: calc(100vh - var(--topbar-height));
   opacity: 1;
 }
 
